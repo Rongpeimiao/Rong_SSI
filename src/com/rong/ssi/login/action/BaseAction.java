@@ -38,22 +38,4 @@ public class BaseAction extends ActionSupport {
 		public static HttpSession getSession() {
 			return getRequest().getSession();
 		}
-		/*public static void responseOutWithJson(HttpServletResponse response,  
-               Object responseObject) {  
-           //将实体对象转换为JSON Object转换  
-           JSONObject responseJSONObject = JSONObject.fromObject(responseObject);  
-           response.setCharacterEncoding("UTF-8");  
-           response.setContentType("application/octet-stream; charset=utf-8");  
-           PrintWriter out = null;  
-           try {  
-               out = response.getWriter();  
-               out.append(responseJSONObject.toString());  
-           } catch (IOException e) {  
-   			Log4jUtil.Log4jUtilThrowable(new Throwable().getStackTrace()[1].getClassName(), e); 
-           } finally {  
-               if (out != null) {  
-                   out.close();  
-               }  
-           }  
-       } */
 }
