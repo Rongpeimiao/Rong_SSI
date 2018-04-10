@@ -97,7 +97,6 @@ public class RegisterAction extends BaseAction {
 
 	public String addUser(){
     	try {
-    		//branchList=userdaoServiceInter.queryBranchDTOList(codeMap);
     		return success;
 		} catch (Exception e) {
 			Log4jUtil.Log4jUtilThrowable(new Throwable().getStackTrace()[1].getClassName(), e);
