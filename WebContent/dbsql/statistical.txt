@@ -1,0 +1,75 @@
+﻿#创建数据库
+create database atisptDB;
+
+#创建用户表
+CREATE TABLE `USER_TAB` (
+  `ID` VARCHAR(100) DEFAULT NULL,
+  `USERCODE` VARCHAR(100) DEFAULT NULL,
+  `USERNAME` VARCHAR(100) DEFAULT NULL,
+  `PASSWORD` VARCHAR(100) DEFAULT NULL,
+  `PRIVI` VARCHAR(100) DEFAULT NULL,
+  `PHONE` VARCHAR(100) DEFAULT NULL,
+  `ADDRESS` VARCHAR(100) DEFAULT NULL,
+  `SEX` VARCHAR(100) DEFAULT NULL,
+  `ENABLE` VARCHAR(100) DEFAULT NULL,
+  `BIRTHDAY` DATE DEFAULT NULL,
+  `CREATE_DATE` datetime ,
+  `LAST_CREATE_DATE` DATE DEFAULT NULL,
+  `TM` DATETIME DEFAULT NULL,
+  `USER_NAMEALL` VARCHAR(100) DEFAULT NULL COMMENT '用户全名',
+  `USER_PASSWORD_ORIGINAL` VARCHAR(100) DEFAULT NULL COMMENT '用户原密码'
+) ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+
+#插入一条用户数据
+insert into  
+  USER_TAB 
+ (USERCODE,
+  USERNAME,
+  password,
+  ADDRESS,
+  SEX,
+  BIRTHDAY,
+  CREATE_DATE
+  )
+  values
+ (
+  'admin',
+  'admin',
+  '123',
+   null,
+   null,
+   now(),
+   now());
+
+
+#Create table 资源表
+create table FND_RESOURCE
+(
+  ID                     varchar(100),
+  RESOURCE_CODE          varchar(100),
+  RESOURCE_NAME          varchar(100),
+  RESOURCE_URL           varchar(100),
+  ROLE_CODE              varchar(100),
+  LAYER_TYPE             varchar(100),
+  PARENT_CODE            varchar(100),
+  FUNCTION_SERIAL_NUMBER varchar(100),
+  REMARK                 varchar(100),
+  ENABLE                 varchar(100),
+  CREATE_DATE            DATE,
+  LAST_CREATE_DATE       DATE
+)ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+ alter table FND_RESOURCE modify column RESOURCE_CODE varchar(100)  comment '资源code';
+ alter table FND_RESOURCE modify column RESOURCE_NAME varchar(100)  comment '功能资源名称';
+ alter table FND_RESOURCE modify column RESOURCE_URL varchar(100)  comment '功能资源url';
+ alter table FND_RESOURCE modify column ROLE_CODE varchar(100)  comment '权限角色';
+ alter table FND_RESOURCE modify column LAYER_TYPE   varchar(100)  comment '层级（1,2,3...）';
+ alter table FND_RESOURCE modify column  PARENT_CODE varchar(100)  comment '父级';
+ alter table FND_RESOURCE modify column  FUNCTION_SERIAL_NUMBER varchar(100)  comment '功能序号';
+ alter table FND_RESOURCE modify column  REMARK varchar(100)  comment '备注';
+ alter table FND_RESOURCE modify column  ENABLE varchar(100)  comment '是否可用';
+ alter table FND_RESOURCE modify column CREATE_DATE         date  comment '创建日期';
+ alter table FND_RESOURCE modify column LAST_CREATE_DATE    date comment '最后创建日期';
+
+
