@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  <!-- dao -->
+ <bean id="userdaoId" class="com.rong.ssi.login.daoImpl.UserDaoImpl">
+  <property name="sqlMapClient" ref="sqlMapClient"></property>
+  </bean>
+   <!-- Service -->
+  <bean id="userDaoServiceId" class="com.rong.ssi.login.serviceImpl.UserDaoServiceImpl">
+  <property name="userdao" ref="userdaoId"></property>
+  </bean>
+    <!-- 用户注册action-->   
+  <bean id="registerAction" name="registerAction" class="com.rong.ssi.login.action.RegisterAction" scope="prototype">
+    <property name="userdaoServiceInter" ref="userDaoServiceId"></property>   
+  </bean>
+   <!-- 公共action-->   
+   <bean id="commonDaoId" class="com.rong.ssi.quartz.daoImpl.CommonDaoImpl">
+  <property name="sqlMapClient" ref="sqlMapClient"></property>
+  </bean>
+  <!--  Service -->
+  <bean id="commonServiceId" class="com.rong.ssi.quartz.serviceImpl.CommonServiceImpl">
+  <property name="commonDaoInter" ref="commonDaoId"></property>
+  </bean>
+</beans>

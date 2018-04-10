@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+ <struts>
+   <!-- 用户注册类 -->
+    <package name="register" extends="struts-default">
+	   <action name="login" class="registerAction" method="loginUser">
+	   <result name="success">index.jsp</result>    
+	   <result name="success2">index01.jsp</result>
+	   <result name="error">index.jsp</result> 
+	   </action>
+	    <action name="queryUser" class="registerAction" method="queryUser">
+	   </action>
+	   <action name="addUser" class="registerAction" method="addUser">
+	   </action>
+	   <action name="queryUserList" class="registerAction" method="queryUserList"></action>   
+<!-- 	   <action name="deleteUser" class="registerAction" method="deleteUser"></action>    
+ -->  </package>
+</struts>

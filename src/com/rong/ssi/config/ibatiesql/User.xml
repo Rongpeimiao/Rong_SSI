@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"   
+"http://ibatis.apache.org/dtd/sql-map-2.dtd"> 
+<sqlMap> 
+<sql id="pager_head_User">
+ select * from(
+</sql>
+<sql id="pager_tail_User">
+<![CDATA[
+ )pager
+   where 1=1 limit #pageNum#,#numPerPage#
+ ]]>
+</sql>
+<!--  )
+   where num between #numPerPage#*(#pageNum#-1)+1 and #numPerPage#*#pageNum# -->
+<typeAlias alias="User" type="com.rong.ssi.login.entity.User"/>
+<insert id="insertUser" parameterClass="User">
+  <![CDATA[ 
+   insert into  
+	  fnd_user 
+	  (user_Code,
+	  user_name,
+	  user_Password,
+	  email,
+	  address,
+	  telephone,
+	  branch_code,
+	  USER_NAMEALL,
+	  USER_PASSWORD_ORIGINAL,
+	  create_date
+	  )
+	  values
+	  (#userCode#,
+	  #userName#,
+	  #userPassword#,
+	  #email#,
+	  #address#,
+	  #telephone#,
+	  #branchCode#,
+	  #userNameall#,
+	  #userPasswordOriginal#,
+	  now()
+	  )
+	  ]]>
+</insert>
+<insert id="insertUserRole" parameterClass="User">
+ <![CDATA[
+  	insert into  
+	  fnd_user_role_relevance 
+	  (
+	  user_Code,
+	  role_Code,
+	  enable,
+	  create_date
+	  )
+	  values
+	  (
+	  #userCode#,
+	  #roleCode#,
+	  'Y',
+	  now()
+      )
+      ]]>
+</insert>
+
+
+<select id="selsectUser" parameterClass="java.util.Map" resultClass="User">
+	select t.user_code as userCode,
+	       t.user_name as userName,
+	       t.user_password as userPassword,
+	       t.email as email,
+	       t.address as address,
+	       t.USER_NAMEALL AS userNameall,
+	       t.USER_PASSWORD_ORIGINAL as userPasswordOriginal,
+	       t.telephone as telephone,
+	       t1.role_code as roleCode,
+	       t2.role_name as roleName,
+           t3.code as branchCode,
+           t3.name as branchName
+	 from fnd_user t
+	 LEFT JOIN FND_USER_ROLE_RELEVANCE T1 ON T.USER_CODE =T1.USER_CODE
+	 LEFT JOIN fnd_role T2 ON T1.ROLE_CODE =T2.ROLE_CODE  
+     LEFT JOIN bus_branch T3 ON t.branch_code =T3.CODE 
+     where 1=1
+    <isNotEmpty  prepend="and" property="userName">
+      t.user_name=#userName#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="userCode">
+      t.user_code=#userCode#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="roleCode">
+      t1.role_code=#roleCode#
+    </isNotEmpty>
+     order by T1.ROLE_CODE asc
+</select>
+<!-- <typeAlias alias="Resource" type="com.rong.ssi.login.entity.Resource"/>
+ --><!-- <select id="selsectResource" parameterClass="java.util.Map" resultClass="Resource">
+     SELECT DISTINCT T.RESOURCE_CODE as resourceCode,
+        T.RESOURCE_NAME as resourceName,
+        T.RESOURCE_URL as resourceUrl,
+        T.LAYER_TYPE as layerType,
+        T.PARENT_CODE as parentCode,
+        T.FUNCTION_SERIAL_NUMBER as functionSerialNumber
+    FROM fnd_resource T LEFT JOIN fnd_role_resource_relevance T1 ON T.RESOURCE_CODE=T1.RESOURCE_CODE
+     WHERE 1=1
+      <isNotEmpty  prepend="and" property="roleCode">
+     T1.ROLE_CODE=#roleCode#
+     </isNotEmpty>
+      <isNotEmpty  prepend="and" property="layerType">
+     T.LAYER_TYPE=#layerType#
+     </isNotEmpty>
+      <isNotEmpty  prepend="and" property="parentCode">
+     T.PARENT_CODE=#parentCode#
+     </isNotEmpty>
+     and T.ENABLE='Y'
+      ORDER BY T.resource_code asc
+</select> -->
+
+<select id="queryUser" parameterClass="java.util.Map" resultClass="User">
+  <include refid="pager_head_User"/>
+	select t.user_code as userCode,
+	       t.user_name as userName,
+	       t.user_password as userPassword,
+	       t.email as email,
+	        t.USER_NAMEALL AS userNameall,
+	        t.USER_PASSWORD_ORIGINAL as userPasswordOriginal,
+	       t.address as address,
+	       t.telephone as telephone
+	 from fnd_user t
+     where 1=1
+    <isNotEmpty  prepend="and" property="userName">
+    t.user_name=#userName#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="userNameall">
+    t.USER_NAMEALL=#userNameall#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="userCode">
+    t.user_code=#userCode#
+    </isNotEmpty>
+   order by T1.userName asc
+   <include refid="pager_tail_User"/>
+</select>
+
+<select id="queryUserListTotal" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+   select 
+   count(*)
+   from fnd_user t
+     where 1=1
+   <isNotEmpty  prepend="and" property="userName">
+    t.user_name=#userName#
+   </isNotEmpty>
+   <isNotEmpty  prepend="and" property="userNameall">
+    t.USER_NAMEALL=#userNameall#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="userCode">
+    t.user_code=#userCode#
+    </isNotEmpty>
+   order by T1.userName asc
+</select>
+
+<!-- <typeAlias alias="Role" type="com.rong.ssi.login.entity.Role"/>
+<select id="queryRole" parameterClass="java.util.Map" resultClass="Role">
+  select 
+    t.role_code as roleCode, 
+    t.role_name as roleName
+  from fnd_role t 
+  order by t.role_code asc
+</select> -->
+
+<delete id="deleteUser" parameterClass="java.util.Map">
+   delete from fnd_user where user_code=#userCode# 
+  </delete>
+<!-- <delete id="deleteUserRole" parameterClass="java.util.Map">
+   delete from FND_USER_ROLE_RELEVANCE where user_code=#userCode# and role_code=#roleCode#
+</delete> -->
+
+
+<!-- 角色 -->
+<!-- <typeAlias alias="role" type="com.rong.ssi.login.entity.Role"/>
+<select id="queryRoleDaoList" parameterClass="java.util.Map" resultClass="role">
+  <include refid="pager_head_User"/>
+	select t.ROLE_CODE as roleCode,
+	       t.ROLE_NAME as roleName
+	 from FND_ROLE t
+     where 1=1
+    <isNotEmpty  prepend="and" property="roleCode">
+    t.ROLE_CODE=#roleCode#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="roleName">
+    t.ROLE_NAME=#roleName#
+    </isNotEmpty>
+   order by t.ROLE_CODE asc
+   <include refid="pager_tail_User"/>
+</select>
+<select id="queryRoleDao" parameterClass="java.util.Map" resultClass="role">
+	select t.ROLE_CODE as roleCode,
+	       t.ROLE_NAME as roleName
+	 from FND_ROLE t
+     where 1=1
+    <isNotEmpty  prepend="and" property="roleCode">
+    t.ROLE_CODE=#roleCode#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="roleName">
+    t.ROLE_NAME=#roleName#
+    </isNotEmpty>
+</select>
+
+<select id="queryRoleDaoListTotal" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+     select 
+     count(*)
+	 from FND_ROLE t
+     where 1=1
+     <isNotEmpty  prepend="and" property="roleCode">
+    t.ROLE_CODE=#roleCode#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="roleName">
+    t.ROLE_NAME=#roleName#
+    </isNotEmpty>
+</select>
+<insert id="sevaRole" parameterClass="java.util.Map">
+ <![CDATA[
+  	insert into  
+	  FND_ROLE 
+	  (
+	  role_Code,
+	  ROLE_NAME,
+	  enable,
+	  create_date
+	  )
+	  values
+	  (
+	  #roleCode#,
+	  #roleName#,
+	  'Y',
+	  now()
+      )
+      ]]>
+</insert>
+<delete id="deleteRoleDao" parameterClass="java.util.Map">
+   delete from FND_ROLE where role_Code=#roleCode#
+</delete>
+
+<select id="queryRoleRelevanceTotal" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+     select 
+     count(*)
+	 from fnd_role_resource_relevance t
+     where 1=1
+     <isNotEmpty  prepend="and" property="roleCode">
+    t.ROLE_CODE=#roleCode#
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="resourceCode">
+    t.RESOURCE_CODE=#resourceCode#
+    </isNotEmpty>
+</select>
+
+<insert id="sevaRoleDaoRelevance" parameterClass="java.util.Map">
+ <![CDATA[
+  	insert into  
+	  fnd_role_resource_relevance 
+	  (
+	  ROLE_CODE,
+	  RESOURCE_CODE,
+	  enable,
+	  create_date
+	  )
+	  values
+	  (
+	  #roleCode#,
+	  #resourceCode#,
+	  'Y',
+	  now()
+      )
+      ]]>
+</insert>
+<delete id="deleteRoleDaoRelevance" parameterClass="java.util.Map">
+   delete from fnd_role_resource_relevance
+    where role_Code=#roleCode# 
+     <isNotEmpty  prepend="and" property="resourceCode">
+      <![CDATA[
+      RESOURCE_CODE like concat(#resourceCode#,'%') 
+          ]]>
+    </isNotEmpty>
+    <isNotEmpty  prepend="and" property="comboxPermissionsOne">
+      <![CDATA[
+      RESOURCE_CODE =#comboxPermissionsOne#
+          ]]>
+    </isNotEmpty>
+</delete> -->
+
+</sqlMap>

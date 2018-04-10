@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+<!-- 配置数据源,连接池采用的是c3p0，具体各参数代表意义参看c3p0自带的doc，非常详细。 -->
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+  <property name="driverClass" value="${jdbc.driverClass}" /> 
+    <property name="jdbcUrl" value="${jdbc.url}" /> 
+    <property name="user" value="${jdbc.user}" /> 
+    <property name="password" value="${jdbc.password}" /> 
+    <property name="minPoolSize" value="${jdbc.minPoolSize}" /> 
+    <property name="maxPoolSize" value="${jdbc.maxPoolSize}" /> 
+    <property name="maxIdleTime" value="${jdbc.maxIdleTime}" /> 
+    <property name="acquireIncrement" value="${jdbc.acquireIncrement}" /> 
+    <property name="maxStatements" value="${jdbc.maxStatements}" /> 
+    <property name="initialPoolSize" value="${jdbc.initialPoolSize}" /> 
+    <property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}" /> 
+    <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}" />
+ </bean>
+ 
+ <!-- 关于在src下面路径需要加"classpath:"。如果在WebContent/WEB-INF/，则直接路径 /WEB-INF/ibatis/jdbc.properties  --> 
+ <!-- 上面的数据源的value值用的是表达式，原因就在这里，这将配置文件放到了iBatis目录下，也就是jdbc.properties，设置了c3p0的各项参数 -->
+ <bean id="propertyConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location">
+    <value>/config/jdbc.properties</value>
+    </property>
+ </bean>
+ 
+<!-- 配置iBatis的sqlMapClient，当然是交给了spring去处理,其中，将SqlMapConfig文件放到了WEB-INF的iBatis目录下，也是便于管理 --> 
+  <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+   <property name="configLocation">
+    <value>classpath:/com/rong/ssi/config/ibatis/SqlMapConfig.xml</value>
+   </property>
+   <!-- 这里使用的数据源就是上面配置的数据源 --> 
+   <property name="dataSource">
+   <ref bean="dataSource"/>
+   </property>
+  </bean>
+  
+<!-- 导入bean配置文件，  -->  
+<import resource="spring_bean_login.xml"/>  
+<import resource="spring_Quartz.xml"/>  
+
+</beans>
