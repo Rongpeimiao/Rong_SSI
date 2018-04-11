@@ -15,11 +15,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 
-
 /**
- * 
  * @author 容培淼
- * 
+ * 常用工具类
  */
 public class CommonUtil
 {
@@ -54,14 +52,13 @@ public class CommonUtil
     }
     return null;
   }
-  
+  //main测试
   public static void main(String[] args)
   {
     System.out.println(MD5Util("123"));
   }
   
-  
-  
+  //yyy-MM-dd 字符串类型转时间类型
   public static final String dataToString1(Date date)
   {
     String dateStr = null;
@@ -72,7 +69,7 @@ public class CommonUtil
     }
     return dateStr;
   }
-  
+  //时间类型转yyy-MM-dd 字符串类型
   public static final Date StringToDate11(String str)
   {
     DateFormat df = new SimpleDateFormat("yyy-MM-dd");
@@ -96,7 +93,7 @@ public class CommonUtil
     }
     return date;
   }
-  
+  //yyy-MM-dd hh:mm 字符串类型转时间类型
   public static final Date StringToDate12(String str)
   {
     DateFormat df = new SimpleDateFormat("yyy-MM-dd hh:mm");
@@ -120,7 +117,7 @@ public class CommonUtil
     }
     return date;
   }
-  
+  //yyyMMddHHmmss 字符串类型转时间类型
   public static final String dataToString2(Date date)
   {
     String dateStr = null;
@@ -131,7 +128,7 @@ public class CommonUtil
     }
     return dateStr;
   }
-  
+//时间类型转yyyMMddHHmmss 字符串类型
   public static final Date StringToDate2(String str)
   {
     DateFormat df = new SimpleDateFormat("yyyMMddHHmmss");
@@ -156,7 +153,7 @@ public class CommonUtil
     }
     return date;
   }
-  
+//yyyy-MM-dd HH:mm:ss 字符串类型转时间类型
   public static final String dataToString3(Date date)
   {
     String dateStr = null;
@@ -167,7 +164,7 @@ public class CommonUtil
     }
     return dateStr;
   }
-  
+//时间类型转yyyy-MM-dd HH:mm:ss 字符串类型
   public static final Date StringToDate(String str)
   {
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -192,7 +189,7 @@ public class CommonUtil
     }
     return date;
   }
-  
+//yyyy-MM-dd HH:mm:ss 字符串类型转时间类型
   public static final Date StringToDate3(String str)
   {
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -217,7 +214,7 @@ public class CommonUtil
     }
     return date;
   }
-  
+  //两个时间相差的天数
   public static int daysBetween(Date smdate, Date bdate)
     throws com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException, java.text.ParseException
   {
@@ -233,7 +230,7 @@ public class CommonUtil
     
     return Integer.parseInt(String.valueOf(between_days));
   }
-  
+  //传入时间增加num天返回结果
   public static final Date dateAddNum(Date date, int num)
   {
     Calendar calendar = new GregorianCalendar();
@@ -274,7 +271,7 @@ public class CommonUtil
     return amountTotal;
   }
   
-  
+  //Bytes编码Utf
   public static final String getBytesToUtf(String str)
   {
     String strs = null;

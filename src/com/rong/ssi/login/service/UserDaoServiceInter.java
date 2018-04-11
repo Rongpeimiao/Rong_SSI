@@ -10,7 +10,7 @@ import com.rong.ssi.login.entity.User;
 public interface UserDaoServiceInter {
 	/**      
 	 * 用户注册服务接口      
-	 * @param user      
+	 * @author 容培淼      
 	 * @return      
      */         
 	 public boolean insertUser(User user);   

@@ -16,7 +16,10 @@ import net.sf.json.JSONObject;
 
 public class BaseAction extends ActionSupport {
 
-
+	/**
+	 * @author 容培淼
+	 * Action 公共类，定义http求救和响应参数和返回结果
+	 */
 	private static final long serialVersionUID = 8842233355600065107L;
     	/** 
         * 以JSON格式输出 

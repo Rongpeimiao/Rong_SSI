@@ -10,7 +10,10 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.rong.ssi.common.Log4jUtil;
 import com.rong.ssi.quartz.dao.CommonDaoInter;
-
+/**      
+ * @author »›≈‡Ìµ      
+ * quartzπ´π≤dao¿‡   
+ */ 
 
 public class CommonDaoImpl extends SqlMapClientDaoSupport implements CommonDaoInter {
 

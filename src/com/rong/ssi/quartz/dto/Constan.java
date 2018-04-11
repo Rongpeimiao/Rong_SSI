@@ -1,6 +1,9 @@
 package com.rong.ssi.quartz.dto;
 
-
+/**      
+ * @author »›≈‡Ìµ      
+ * ≥£¡ø¿‡
+ */ 
 public class Constan {
 
 	private String code; 

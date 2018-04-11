@@ -11,7 +11,11 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.rong.ssi.login.dao.UserDao;
 import com.rong.ssi.login.entity.User;
 
-
+/**
+ * @author »›≈‡Ìµ
+ * ”√ªßµ«¬ΩDao
+ * 
+ */
 public class UserDaoImpl extends SqlMapClientDaoSupport implements UserDao{
 
 	@Override

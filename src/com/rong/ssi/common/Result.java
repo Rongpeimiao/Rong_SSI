@@ -1,5 +1,10 @@
 package com.rong.ssi.common;
 
+/**
+ * @author 容培淼
+ * action接受请求返回结果封装类
+ */
+
 public class Result
 {
   private String path;

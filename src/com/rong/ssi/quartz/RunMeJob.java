@@ -7,7 +7,10 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.rong.ssi.quartz.service.CommonJobServiceInter;
 import com.rong.ssi.quartz.serviceImpl.CommonJobServiceImpl;
 
-
+/**      
+ * @author »›≈‡Ìµ      
+ * QuartzJobBean ¿‡   
+ */ 
 
 public class RunMeJob extends QuartzJobBean {
 	  private RunMeTask runMeTask;

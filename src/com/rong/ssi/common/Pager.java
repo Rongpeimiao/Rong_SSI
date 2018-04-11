@@ -1,5 +1,9 @@
 package com.rong.ssi.common;
-
+/**
+ * @author 容培淼
+ * @data  20180410
+ * 分页工具类
+ */
 public class Pager {
 
    private  Integer pageNum;

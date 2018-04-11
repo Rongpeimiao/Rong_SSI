@@ -6,7 +6,10 @@ import java.util.Map;
 
 import com.rong.ssi.quartz.dao.CommonDaoInter;
 import com.rong.ssi.quartz.service.CommonServiceInter;
-
+/**      
+ * @author 容培淼      
+ * quartz公共服务类   
+ */ 
 public class CommonServiceImpl implements CommonServiceInter {
 
 	 private CommonDaoInter commonDaoInter;

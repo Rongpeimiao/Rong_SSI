@@ -3,6 +3,7 @@ package com.rong.ssi.login.entity;
 
 public class User {
     /**
+     * @author »›≈‡Ìµ
      * ”√ªß¿‡
      * 
      */

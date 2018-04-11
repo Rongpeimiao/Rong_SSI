@@ -1,19 +1,16 @@
 package com.rong.ssi.quartz.serviceImpl;
 
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.rong.ssi.quartz.dto.Pager;
 import com.rong.ssi.quartz.service.CommonJobServiceInter;
 import com.rong.ssi.quartz.service.CommonServiceInter;
 
-
+/**      
+ * @author 容培淼      
+ * quartz公共服务类   
+ */ 
 public class CommonJobServiceImpl implements CommonJobServiceInter {
 
 	public CommonJobServiceImpl() {
@@ -21,27 +18,9 @@ public class CommonJobServiceImpl implements CommonJobServiceInter {
 	private  Pager pager;
 	private Integer numPerPage;
 	private Integer pageNum;
-	private String motorcoachNumber;
-	private Integer allWaybill=1;
-	private String	vehicleCode;
 	private  CommonServiceInter commonServiceInter;
 	
 
-	public String getVehicleCode() {
-		return vehicleCode;
-	}
-
-	public void setVehicleCode(String vehicleCode) {
-		this.vehicleCode = vehicleCode;
-	}
-
-	public Integer getAllWaybill() {
-		return allWaybill;
-	}
-
-	public void setAllWaybill(Integer allWaybill) {
-		this.allWaybill = allWaybill;
-	}
 
 	public CommonServiceInter getCommonServiceInter() {
 		return commonServiceInter;
@@ -66,9 +45,6 @@ public class CommonJobServiceImpl implements CommonJobServiceInter {
 	}
 
 
-	public String getMotorcoachNumber() {
-		return motorcoachNumber;
-	}
 
 
 	public void setPager(Pager pager) {
@@ -83,10 +59,6 @@ public class CommonJobServiceImpl implements CommonJobServiceInter {
 		this.pageNum = pageNum;
 	}
 
-
-	public void setMotorcoachNumber(String motorcoachNumber) {
-		this.motorcoachNumber = motorcoachNumber;
-	}
 
 
 	@Override

@@ -7,7 +7,11 @@ import java.util.Map;
 import com.rong.ssi.login.dao.UserDao;
 import com.rong.ssi.login.entity.User;
 import com.rong.ssi.login.service.UserDaoServiceInter;
-
+/**      
+ * 用户注册服务      
+ * @author 容培淼      
+ * @return      
+ */ 
 public class UserDaoServiceImpl implements UserDaoServiceInter{
 
 	private UserDao userdao;

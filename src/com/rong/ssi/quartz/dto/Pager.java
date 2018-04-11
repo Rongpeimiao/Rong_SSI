@@ -1,5 +1,8 @@
 package com.rong.ssi.quartz.dto;
-
+/**      
+ * @author »›≈‡Ìµ      
+ * quartz∑÷“≥∑‚◊∞¿‡
+ */ 
 
 public class Pager {
 

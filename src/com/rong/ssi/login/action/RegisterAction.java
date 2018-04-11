@@ -1,9 +1,5 @@
 package com.rong.ssi.login.action;
 
-
-
-
-
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +11,11 @@ import com.rong.ssi.common.Log4jUtil;
 import com.rong.ssi.common.Pager;
 import com.rong.ssi.login.entity.User;
 import com.rong.ssi.login.service.UserDaoServiceInter;
-
+/**
+ * @author »›≈‡Ìµ
+ * ”√ªßµ«¬Ωaction
+ * 
+ */
 public class RegisterAction extends BaseAction {
 
 	/**
