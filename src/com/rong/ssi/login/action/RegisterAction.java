@@ -94,58 +94,32 @@ public class RegisterAction extends BaseAction {
 	public void setUserDto(User userDto) {
 		this.userDto = userDto;
 	}
-
-	public String addUser(){
-    	try {
-    		return success;
-		} catch (Exception e) {
-			Log4jUtil.Log4jUtilThrowable(new Throwable().getStackTrace()[1].getClassName(), e);
-			return "error";		
-		}
-    }
-    
-    public void sevaUser(){
-    	boolean a=false;
-    	try {
-		} catch (Exception e) {
-			Log4jUtil.Log4jUtilThrowable(new Throwable().getStackTrace()[1].getClassName(), e);
-			CommonUtil.responseOutWithJson("300");
-		}
-    }
-    public String loginUser()throws Exception{
+   
+	public String loginUser()throws Exception{
     	try {
     		if(null!=this.userName&&!"".equals(this.userName)){
 				Map<String, Object>  codeMap=new HashMap<String,Object>();
 				codeMap.put("userName", userName);
+				codeMap.put("password", CommonUtil.MD5Util(password));
+				
+				Integer total=userdaoServiceInter.queryUserListTotal(codeMap);
+			    pager=new Pager(pageNum, numPerPage, total);
+				codeMap.put("pageNum",(pager.getPageNum()-1)*pager.getNumPerPage());
+				codeMap.put("numPerPage", pager.getNumPerPage());
+				
 				userList=userdaoServiceInter.queryUserList(codeMap);
-					return "success";
+					if(userList.size()>0&&!userList.isEmpty()){
+						return "success";
+					}else{
+						return "error";
+					}
 				}else{
-					return "error";
+				return "error";
 			}
 		} catch (Exception e) {
 			Log4jUtil.Log4jUtilThrowable(new Throwable().getStackTrace()[1].getClassName(), e);
 			return "error";
 		}
     }
-    public String queryUser(){
-    	Map<String, Object>  codeMap=new HashMap<String,Object>();
-    	codeMap.put("userName", userDto.getUserName());
-    	codeMap.put("userCode", userDto.getUserCode());
-		Integer total=userdaoServiceInter.queryUserListTotal(codeMap);
-	    pager=new Pager(pageNum, numPerPage, total);
-		codeMap.put("pageNum",(pager.getPageNum()-1)*pager.getNumPerPage());
-		codeMap.put("numPerPage", pager.getNumPerPage());
-        userList=userdaoServiceInter.queryUserList(codeMap);
-		return success;
-    }
-    String userNameall;
-    
-	public String getUserNameall() {
-		return userNameall;
-	}
-	public void setUserNameall(String userNameall) {
-		this.userNameall = userNameall;
-	}
- 
 
 }

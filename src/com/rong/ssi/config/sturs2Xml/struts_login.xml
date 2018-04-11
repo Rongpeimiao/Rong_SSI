@@ -5,14 +5,7 @@
     <package name="register" extends="struts-default">
 	   <action name="login" class="registerAction" method="loginUser">
 	   <result name="success">index.jsp</result>    
-	   <result name="success2">index01.jsp</result>
-	   <result name="error">index.jsp</result> 
+	   <result name="error">login.jsp</result> 
 	   </action>
-	    <action name="queryUser" class="registerAction" method="queryUser">
-	   </action>
-	   <action name="addUser" class="registerAction" method="addUser">
-	   </action>
-	   <action name="queryUserList" class="registerAction" method="queryUserList"></action>   
-<!-- 	   <action name="deleteUser" class="registerAction" method="deleteUser"></action>    
- -->  </package>
+	</package>
 </struts>

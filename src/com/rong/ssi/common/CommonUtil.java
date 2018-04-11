@@ -3,10 +3,8 @@ package com.rong.ssi.common;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
@@ -15,9 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.servlet.http.HttpServletResponse;
-import net.sf.json.JSONObject;
-import org.apache.struts2.ServletActionContext;
 
 
 
@@ -28,6 +23,7 @@ import org.apache.struts2.ServletActionContext;
  */
 public class CommonUtil
 {
+	//MD5Util字符串加密
   public static final String MD5Util(String s)
   {
     char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
@@ -64,72 +60,7 @@ public class CommonUtil
     System.out.println(MD5Util("123"));
   }
   
-  public static final void responseOutWithJson(String str)
-  {
-    HttpServletResponse response = ServletActionContext.getResponse();
-    String str2 = "操作成功";
-    if ("300".equals(str)) {
-      str2 = "操作成功";
-    }
-    String responseObject = "{\"statusCode\":\"" + str + "\",\"message\":\"" + str2 + 
-      "\", \"navTabId\":\"\", \"rel\":\"\",\"callbackType\":\"closeCurrent\",\"forwardUrl\":\"\"}";
-    response = ServletActionContext.getResponse();
-    response.setCharacterEncoding("UTF-8");
-    response.setContentType("application/octet-stream; charset=utf-8");
-    PrintWriter out = null;
-    try
-    {
-      out = response.getWriter();
-    }
-    catch (IOException e)
-    {
-      Log4jUtil.Log4jUtilThrowable(new java.lang.Throwable().getStackTrace()[1].getClassName(), e);
-    }
-    out.append(responseObject.toString());
-  }
   
-  public static final void responseOutWithJsonAjax(String str)
-  {
-    HttpServletResponse response = ServletActionContext.getResponse();
-    String responseObject = str;
-    response = ServletActionContext.getResponse();
-    response.setCharacterEncoding("UTF-8");
-    response.setContentType("application/json-default; charset=utf-8");
-    PrintWriter out = null;
-    try
-    {
-      out = response.getWriter();
-    }
-    catch (IOException e)
-    {
-      Log4jUtil.Log4jUtilThrowable(new java.lang.Throwable().getStackTrace()[1].getClassName(), e);
-    }
-    out.append(responseObject.toString());
-  }
-  
-  public static final void responseOutWithApp(Object responseObject)
-  {
-    HttpServletResponse response = ServletActionContext.getResponse();
-    JSONObject responseJSONObject = JSONObject.fromObject(responseObject);
-    response.setCharacterEncoding("UTF-8");
-    response.setContentType("application/json; charset=utf-8");
-    PrintWriter out = null;
-    try
-    {
-      out = response.getWriter();
-      out.append(responseJSONObject.toString());
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
-    finally
-    {
-      if (out != null) {
-        out.close();
-      }
-    }
-  }
   
   public static final String dataToString1(Date date)
   {

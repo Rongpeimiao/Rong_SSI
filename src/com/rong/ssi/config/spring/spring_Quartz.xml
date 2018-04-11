@@ -22,16 +22,13 @@
     </bean>
 
     
- <!--    <bean id="runMeJob" 
+  <!--  <bean id="runMeJob" 
             class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
         <property name="targetMethod" value="printMe" /> 
     </bean>  -->
    
-
-    <!-- Simple Trigger, run every 5 seconds -->
-<!--     <bean id="simpleTrigger" 
-                class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-
+  <!-- Simple Trigger, run every 5 seconds -->
+  <!--<bean id="simpleTrigger"    class="org.springframework.scheduling.quartz.SimpleTriggerBean">
         <property name="jobDetail" ref="runMeJob" />
         <property name="repeatInterval" value="5000" />
         <property name="startDelay" value="1000" />
@@ -39,14 +36,23 @@
     </bean> -->
 
     <!-- Cron Trigger, run every 5 seconds -->
-    <bean id="cronTrigger" 
-                class="org.springframework.scheduling.quartz.CronTriggerBean">
 
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="runMeJob" />
-        <property name="cronExpression" value="0 00 10 * * ? *" />
-
+        <property name="cronExpression" value="0 52 09 * * ? *" />
     </bean>
-
+    <!--  时间参数说明
+    1.秒（0~59）
+	2.分钟（0~59）
+	3.小时（0~23） 
+	4.天（月）（0~31，但是你需要考虑你月的天数）
+	5.月（0~11）
+	6.天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）
+	7.年份（1970－2099）
+	0 0 10,14,16 * * ? 每天上午10点，下午2点，4点
+	0 0/30 9-17 * * ??? 朝九晚五工作时间内每半小时
+	0 0 12 ? * WED 表示每个星期三中午12点
+     -->
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>

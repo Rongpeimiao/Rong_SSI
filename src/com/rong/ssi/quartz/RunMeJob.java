@@ -29,7 +29,6 @@ public class RunMeJob extends QuartzJobBean {
 	        throws JobExecutionException {
 
 	        runMeTask.printMe();
-	        commonJobServiceImpl.quartzJob();
-	      // commonJobServiceInter.vehicleJob();
+	       // commonJobServiceImpl.quartzJob();
 	    }
 }
