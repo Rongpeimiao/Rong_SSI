@@ -1,0 +1,43 @@
+#创建数据库
+create database rong_ssi_db;
+
+#创建用户表
+create table `user_tab` (
+ `id` int(10) primary key not null auto_increment  COMMENT '自增主键',
+ `user_code` varchar(50) null    COMMENT '用户编码',
+ `user_name` varchar(100) null   COMMENT '用户姓名',
+ `user_Password` varchar(100) null COMMENT '用户密码',
+ `phone` varchar(100) null COMMENT '用户联系方式',
+ `address` varchar(100) null COMMENT '用户地址',
+ `sex` varchar(50) null  COMMENT '用户性别',
+ `birthday` datetime null COMMENT '用户出生日期',
+ `gmt_create` datetime null COMMENT '用户信息创建时间',
+ `gmt_modified` datetime null COMMENT '用户信息修改建时间',
+ `enable` varchar(100) null COMMENT '用户信息是否可用',
+ fulltext (`address`)
+)engine=innodb default charset=utf8;
+
+#primary key  (`id`),  #设置主键索引
+#fulltext (`address`)   #设置目前只有char、varchar，text 列上可以创建全文索引
+#创建组合索引
+alter table   `user_tab`  add index  name_phone (user_code,phone); 
+
+insert into  user_tab 
+(
+  user_code,
+  user_name,
+  user_Password,
+  gmt_create,
+  gmt_modified
+  )
+  values
+ (
+  'admin',
+  'rong',
+  '123',
+   now(),
+   now()
+  );
+
+
+

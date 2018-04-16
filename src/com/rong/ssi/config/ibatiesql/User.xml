@@ -17,28 +17,18 @@
 <insert id="insertUser" parameterClass="User">
   <![CDATA[ 
    insert into  
-	  fnd_user 
+	  user_tab 
 	  (user_Code,
 	  user_name,
 	  user_Password,
-	  email,
-	  address,
-	  telephone,
-	  branch_code,
-	  USER_NAMEALL,
-	  USER_PASSWORD_ORIGINAL,
-	  create_date
+	  gmt_create,
+	  gmt_modified
 	  )
 	  values
 	  (#userCode#,
 	  #userName#,
 	  #userPassword#,
-	  #email#,
-	  #address#,
-	  #telephone#,
-	  #branchCode#,
-	  #userNameall#,
-	  #userPasswordOriginal#,
+	  now(),
 	  now()
 	  )
 	  ]]>
@@ -48,17 +38,8 @@
 <select id="selsectUser" parameterClass="java.util.Map" resultClass="User">
 	select t.user_code as userCode,
 	       t.user_name as userName,
-	       t.user_password as userPassword,
-	       t.email as email,
-	       t.address as address,
-	       t.USER_NAMEALL AS userNameall,
-	       t.USER_PASSWORD_ORIGINAL as userPasswordOriginal,
-	       t.telephone as telephone,
-	       t1.role_code as roleCode,
-	       t2.role_name as roleName,
-           t3.code as branchCode,
-           t3.name as branchName
-	 from fnd_user t
+	       t.user_password as userPassword
+	 from user_tab t
      where 1=1
     <isNotEmpty  prepend="and" property="userName">
       t.user_name=#userName#
@@ -69,20 +50,15 @@
      <isNotEmpty  prepend="and" property="password">
     t.user_password=#password#
     </isNotEmpty>
-     order by t.user_name asc
+     order by t.gmt_create asc
 </select>
 
 <select id="queryUser" parameterClass="java.util.Map" resultClass="User">
   <include refid="pager_head_User"/>
 	select t.user_code as userCode,
 	       t.user_name as userName,
-	       t.user_password as userPassword,
-	       t.email as email,
-	        t.USER_NAMEALL AS userNameall,
-	        t.USER_PASSWORD_ORIGINAL as userPasswordOriginal,
-	       t.address as address,
-	       t.telephone as telephone
-	 from fnd_user t
+	       t.user_password as userPassword
+	 from user_tab t
      where 1=1
     <isNotEmpty  prepend="and" property="userName">
     t.user_name=#userName#
@@ -90,14 +66,14 @@
       <isNotEmpty  prepend="and" property="password">
     t.user_password=#password#
     </isNotEmpty>
-   order by t.user_name asc
+   order by t.gmt_create asc
    <include refid="pager_tail_User"/>
 </select>
 
 <select id="queryUserListTotal" parameterClass="java.util.Map" resultClass="java.lang.Integer">
    select 
    count(*)
-   from fnd_user t
+   from user_tab t
      where 1=1
    <isNotEmpty  prepend="and" property="userName">
       t.user_name=#userName#
@@ -105,11 +81,10 @@
      <isNotEmpty  prepend="and" property="password">
      t.user_password=#password#
     </isNotEmpty>
-   order by t.user_name asc
 </select>
 
 <delete id="deleteUser" parameterClass="java.util.Map">
-   delete from fnd_user where user_code=#userCode# 
+   delete from user_tab where user_code=#userCode# 
   </delete>
 
 </sqlMap>

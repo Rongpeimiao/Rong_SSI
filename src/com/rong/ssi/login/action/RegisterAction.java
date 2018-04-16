@@ -23,7 +23,7 @@ public class RegisterAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = 1L;
     private UserDaoServiceInter  userdaoServiceInter;
-    private String userName;
+    private String userCode;
     private String password;
     private List<User> userList=new ArrayList<User>();
     private  Pager pager;
@@ -35,9 +35,16 @@ public class RegisterAction extends BaseAction {
 		return userdaoServiceInter;
 	}
 
-	public String getUserName() {
-		return userName;
+
+	public String getUserCode() {
+		return userCode;
 	}
+
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+
 
 	public String getPassword() {
 		return password;
@@ -67,9 +74,6 @@ public class RegisterAction extends BaseAction {
 		this.userdaoServiceInter = userdaoServiceInter;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -97,10 +101,10 @@ public class RegisterAction extends BaseAction {
    
 	public String loginUser()throws Exception{
     	try {
-    		if(null!=this.userName&&!"".equals(this.userName)){
+    		if(null!=this.userCode&&!"".equals(this.userCode)){
 				Map<String, Object>  codeMap=new HashMap<String,Object>();
-				codeMap.put("userName", userName);
-				codeMap.put("password", CommonUtil.MD5Util(password));
+				codeMap.put("userCode", userCode);
+				codeMap.put("password",password);// CommonUtil.MD5Util(password)
 				
 				Integer total=userdaoServiceInter.queryUserListTotal(codeMap);
 			    pager=new Pager(pageNum, numPerPage, total);
