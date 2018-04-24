@@ -117,7 +117,7 @@ public class RegisterAction extends BaseAction {
 					}else{
 						return "error";
 					}
-				}else{
+			}else{
 				return "error";
 			}
 		} catch (Exception e) {
