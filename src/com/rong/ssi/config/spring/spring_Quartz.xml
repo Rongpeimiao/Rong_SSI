@@ -39,7 +39,7 @@
 
     <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="runMeJob" />
-        <property name="cronExpression" value="0 52 09 * * ? *" />
+        <property name="cronExpression" value="0 55 09 * * ? *" />
     </bean>
     <!--  时间参数说明
     1.秒（0~59）
