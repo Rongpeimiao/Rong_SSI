@@ -39,7 +39,7 @@
 
     <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="runMeJob" />
-        <property name="cronExpression" value="0 55 09 * * ? *" />
+        <property name="cronExpression" value="0 32 10 * * ? *" />
     </bean>
     <!--  时间参数说明
     1.秒（0~59）
@@ -54,6 +54,7 @@
 	0 0 12 ? * WED 表示每个星期三中午12点
      -->
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+       
         <property name="jobDetails">
             <list>
                 <ref bean="runMeJob" />
@@ -65,6 +66,13 @@
                 <ref bean="cronTrigger" />
             </list>
         </property>
+        
+        <!-- 取消quartz定时更新 -->
+        <property name="quartzProperties"> 
+			<props>
+				<prop key="org.quartz.scheduler.skipUpdateCheck">true</prop> 
+			</props>
+		</property>
     </bean>
 
 </beans>
