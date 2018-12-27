@@ -4,8 +4,8 @@
    <!-- 用户注册类 -->
     <package name="register" extends="struts-default">
 	   <action name="login" class="registerAction" method="loginUser">
-	   <result name="success">index.jsp</result>    
-	   <result name="error">login.jsp</result> 
+	   <result name="success">styles/dwz/index.jsp</result>    
+	   <result name="error">styles/dwz/login.html</result> 
 	   </action>
 	</package>
 </struts>

@@ -53,10 +53,7 @@ public class CommonUtil
     return null;
   }
   //main测试
-  public static void main(String[] args)
-  {
-    System.out.println(MD5Util("123"));
-  }
+
   
   //yyy-MM-dd 字符串类型转时间类型
   public static final String dataToString1(Date date)
@@ -330,4 +327,20 @@ public class CommonUtil
     
     return newD;
   }
+	 public static void main(String[] args) {
+		 openExe();
+	}
+  
+	//调用其他的可执行文件，例如：自己制作的exe，或是 下载 安装的软件.  
+	public static void openExe() {  
+	   final Runtime runtime = Runtime.getRuntime();  
+	   Process process = null;  
+	 
+	   try {  
+	       process = runtime.exec("C:\\Users\\Administrator\\Desktop\\3D肺结节\\DICOMViewer.exe");  
+	 
+	   } catch (final Exception e) {  
+	       System.out.println("Error exec!");  
+	   }  
+	}  
 }
