@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<jsp:include page="common/common.jsp"></jsp:include>   
+<jsp:include   page="/styles/dwz/common/common.jsp"></jsp:include>      
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -41,7 +41,7 @@ $(function(){
 						<li><a>模板</a>
 						<ul >
 <!-- 							<li><a target="navTab" rel="" href="sitequeryUpdateapp.action?imei=867330028426016">BMS数据</a></li>
- -->							<li><a target="navTab" rel="" href="jsp/demo/demo_page1.html">表格模板</a></li>
+ -->							<li><a target="navTab" rel="" href="./jsp/demo/w_textInput.html">表格模板</a></li>
 						</ul>
 						</li>
 					</ul>
