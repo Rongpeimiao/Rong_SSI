@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--数据库驱动-->
+    <classPathEntry
+            location="C:\Users\Administrator\Desktop\generator\mysql-connector-java-5.1.27.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/rong_ssi_db"
+                        userId="root"
+                        password="123"/>
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="TdModel"
+                            targetProject="C:/Users/Administrator/Desktop/generator">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mybatis"
+                         targetProject="C:/Users/Administrator/Desktop/generator">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator targetPackage="dao"
+                             targetProject="C:/Users/Administrator/Desktop/generator" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        
+		<!--tableName：数据库表名；domainObjectName：生成java类名-->
+        <table tableName="user_tab"
+               domainObjectName="user_tab1"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+               enableInsert="true"
+               enableUpdateByPrimaryKey="false"
+               enableDeleteByPrimaryKey="false">
+        </table>
+
+    </context>
+</generatorConfiguration>
