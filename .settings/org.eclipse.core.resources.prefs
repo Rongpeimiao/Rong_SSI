@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/config/jdbc.properties=UTF-8
+encoding//WebContent/jsp/demo/demo_page1.html=UTF-8
+encoding//WebContent/styles/dwz/login_dialog.html=UTF-8
 encoding//src/com/rong/ssi/common/CommonUtil.java=UTF-8
+encoding/README.md=UTF-8
