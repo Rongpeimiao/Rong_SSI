@@ -1,0 +1,276 @@
+<!-- <jsp:include page="./styles/dwz/common/common.jsp"></jsp:include>  -->  
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <link href="./styles/dwz/themes/css/login.css" rel="stylesheet" type="text/css" />
+
+ <script language="JavaScript" src="./styles/dwz/js/jquery-1.7.2.js"></script> 
+<!--  <script language="JavaScript" src="./styles/dwz/js/jquery-1.7.2.min.js"></script> 
+ --> 
+<title> </title>
+<script type="text/javascript">
+$(function(){
+	 //设置此处的原因是每次进入界面展示一个随机的验证码，不设置则为空
+	createCode();
+	/* DWZ.init("dwz.frag.xml", {
+		callback:function(){
+			initEnv();
+			$("#themeList").theme({themeBase:"themes"}); // themeBase 相对于index页面的主题base路径
+		}
+	}); */
+
+	/* alert(1)
+	var loginname =document.cookie;
+    var password = $.cookie('password');
+    if (typeof(loginname) != "undefined"
+            && typeof(password) != "undefined") {
+        $("#name").val(loginname);
+        $("#password").val(password);
+        $("#saveid").attr("checked", true);
+        $("#code").focus();
+    } */
+	//使用方式：
+	get_cookie("name");
+});
+
+function get_cookie(Name) {
+	   var search = Name + "="//查询检索的值
+	   var returnvalue = "";//返回值
+	   if (document.cookie.length > 0) {
+	     sd = document.cookie.indexOf(search);
+	     if (sd!= -1) {
+	        sd += search.length;
+	        end = document.cookie.indexOf(";", sd);
+	        if (end == -1)
+	         end = document.cookie.length;
+	         //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+	        returnvalue=unescape(document.cookie.substring(sd, end))
+	        var str = returnvalue.split('&');
+	        $("#name").val(str[0]);
+	        $("#password").val(str[1]);
+	        $("#saveid").prop("checked", true); 
+	      }else{ 
+	    	  $("#name").val("");
+		      $("#password").val("");
+		      $("#saveid").prop("checked", false); 
+		  }
+	   } 
+	}
+
+</script>
+ <script>
+     function sbtform(){
+    	 var n=$("#name").val()
+    	 var p=$("#password").val();
+
+    	 if(null!=n&&null!=p&&""!=n&&""!=p){
+    	 $("#userNameform").val(n);
+    	 $("#passwordform").val(p);
+    	/*  if(validate()){
+    	       $("#loginform").submit();
+         } */
+    	  $("#loginform").submit();
+    	  
+    	 }else if(null==n|""==n){
+    		 $("#warn").html("登录名称不能为空")
+    	 }else if(null==p|""==p){
+    		 $("#warn").html("登陆密码不能为空")
+    	 }
+
+
+    	 savePaw();
+     }
+
+     //设置一个全局的变量，便于保存验证码
+     var code;
+     function createCode(){
+         //首先默认code为空字符串
+         code = '';
+         //设置长度，这里看需求，我这里设置了4
+         var codeLength = 4;
+         var codeV = document.getElementById('code');
+         //设置随机字符
+         var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z');
+         //循环codeLength 我设置的4就是循环4次
+         for(var i = 0; i < codeLength; i++){
+             //设置随机数范围,这设置为0 ~ 36
+              var index = Math.floor(Math.random()*36);
+              //字符串拼接 将每次随机的字符 进行拼接
+              code += random[index]; 
+         }
+         //将拼接好的字符串赋值给展示的Value
+         codeV.innerText = code;
+     }
+
+   //下面就是判断是否== 的代码，无需解释
+     function   validate(){
+         var oValue = document.getElementById('input').value.toUpperCase();
+         if(oValue ==0){
+             alert('请输入验证码');
+             return false;
+         }else if(oValue != code){
+             alert('验证码不正确，请重新输入');
+             oValue = ' ';
+             createCode();
+             return false;
+         }else{
+        	  return true;
+         }
+     }
+
+
+
+
+   //如果未勾选，则将cookie中的值设置为失效
+     function savePaw() {
+    	 var n=$("#name").val()
+    	 var p=$("#password").val();
+    	 if($("#saveid").is(":checked")){
+        	 //勾选
+    		//获取当前时间
+        	 var date=new Date();
+	       	 var expiresDays=10;
+	       	 //将date设置为10天以后的时间
+	       	 date.setTime(date.getTime()+expiresDays*24*3600*1000);
+	       	 //将userId和userName两个cookie设置为10天后过期
+	       	 document.cookie= "name="+n+"&"+p+"; expires="+date.toGMTString(); 
+        }else{
+            //未勾选
+        	//获取当前时间
+    		 var date=new Date();
+    		 //将date设置为过去的时间
+    		 date.setTime(date.getTime()-10000);
+    		 //将userId这个cookie删除
+    		 document.cookie= "name="+n+"&"+p+"; expires="+date.toGMTString(); 
+         }
+     }
+
+   
+
+    </script>
+</head>
+<body>
+<form id="loginform" action="login.action" method="post">
+   <input hidden="hidden" name="userCode" id="userNameform"/>
+   <input hidden="hidden"  name="password" id="passwordform"/>
+  </form>
+	<div id="login">
+		<div id="login_header">
+			<h1 class="login_logo">
+				<a href=""><img src="./images/BGImg/login_logo.png" /></a>
+			</h1>
+			<div class="login_headerContent">
+				<div class="navList">
+				<!-- 	<ul>
+						<li><a href="#">设为首页</a></li>
+						<li><a href=" ">反馈</a></li>
+						<li><a href="" target="_blank">帮助</a></li>
+					</ul> -->
+				</div>
+				<h2 class="login_title" style="font-size: 25px;margin-right: 50px;" align="center" ><!-- <img src="./styles/dwz/themes/default/images/login_title.png" /> -->系统登录        </h2>
+			</div>
+		</div>
+		<div id="login_content">
+			<div class="loginForm">
+				<form action="">
+				 <table>
+					 <tr height="30px;"><td >
+							<label>用户名：</label>
+						 </td>
+						 <td><!-- <input type="text" name="userCode"  style="display:none"/>  --><!-- input 阻止自动填充用户名 -->
+							<input type="text"  autocomplete="off"  id="name" name="userCode" size="20"  value="" class="login_input" />
+						</td>
+					</tr>
+					 <tr height="30px;" ><td>
+								<label>密码：</label>
+							 </td>
+						     <td><input type="password" name="password1"  style="display:none"/> <!-- input 阻止自动填充密码 -->
+								<input  id="password"  autocomplete="off"  type="password"  name="password" size="20"  value="" class="login_input" />
+							 </td>
+					</tr>
+					 <tr height="30px;" >
+					 <td>
+								<label>验证码：</label>
+							 </td>
+						    <td>
+								<input class="code" id = "input" type="text" size="5" />
+  								<p  style="color: red;" id="code"  href="#"  onclick="createCode()" ></p>
+ 							</td>
+					</tr>
+					<tr>
+					<td colspan="2"> 
+					         <div style="float: left; margin-top: 3px;"margin-left: 5px; ">
+					        <font > &nbsp; &nbsp; 记住账户和密码</font>
+						    </div>
+						    <div style="float: left;">
+						      &nbsp; &nbsp; &nbsp;    <input id="saveid" type="checkbox" onclick="savePaw();" style="padding-top: 0px;" />
+						    </div>
+					</td>
+					</tr>
+					
+					<tr height="30px;"> 
+						      <td colspan="2">
+									<div class="login_bar" style="margin-top: 15px;">
+										<input   class="sub" type="button" value=" "  onclick="sbtform()" />
+									</div>
+							 </td>
+					</tr>
+					</table>
+				</form>
+			</div>
+			<div class="login_banner"><img style="width: 950px;height: 270px;" src="./images/BGImg/bg0.jpg" /></div>
+	<div id="foot-zone">
+        <div align="center">
+        <table><tr>
+        <td>
+        <img style="width: 100px;height: 100px;" src="./images/BGImg/icon/pgs.png" />
+        </td>
+         <td>
+        <img style="width: 100px;height: 100px;" src="./images/BGImg/icon/wc.png" />
+        </td>
+         <td>
+            <img style="width: 100px;height: 100px;" src="./images/BGImg/icon/ycb.png" />
+        </td>
+         <td>
+          <img style="width: 100px;height: 100px;" src="./images/BGImg/icon/yg.png" />
+        </td>
+         <td>
+            <img style="width: 100px;height: 100px;" src="./images/BGImg/icon/zl.png" />
+        </td>
+        
+        </tr></table>
+        </div>
+			</div>
+		</div>
+		<div id="login_footer">
+		<!--  <ul >
+                <li><a target="_blank" href="#">PGS/PGD检测</a></li>
+                <li><a target="_blank" href="javascript:;">NIPT</a></li>
+                <li><a target="_blank" href="javascript:;">遗传病检测</a></li>
+                <li><a target="_blank" href="javascript:;">肿瘤检测</a></li>
+                <li><a target="_blank" href="javascript:;">CtDNA检测</a></li>
+                <li><a target="_blank" href="javascript:;">易感基因检测</a></li>
+                <li><a target="_blank" href="javascript:;">CTC检测</a> </li>
+            </ul> -->
+            <!--  <table><tr>
+             <td>PGS/PGD检测</td>
+               <td>NIPT</td>
+                 <td>遗传病检测</td>
+                   <td>肿瘤检测</td>
+                     <td>CtDNA检测</td>
+                       <td>易感基因检测</td>
+                         <td>CTC检测</td>
+                     
+             </tr></table> -->
+              <br/>  <br/> PGS/PGD检测    &nbsp; |
+                         &nbsp;  NIPT &nbsp; |
+                         &nbsp;  遗传病检测  &nbsp; | 
+                         &nbsp; 肿瘤检测   &nbsp; | 
+                         &nbsp; CtDNA检测  &nbsp;   |  
+                         &nbsp;易感基因检测   &nbsp;  |  
+                         &nbsp;CTC检测  <br/>  <br/> 
+			遗传学检测分析管理系统（1.3.0） @2019版权所有 广州达瑞生物生殖技术有限公司
+		</div>
+	</div>
+</body>
+</html>
