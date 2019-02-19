@@ -1,7 +1,11 @@
 package com.rong.ssi.common;
 
 import java.io.UnsupportedEncodingException;
-
+/***
+ * https://www.cmd5.com/
+ * 加密类型有很多，把密文复制到上面的网站可以查询，查看出是什么类型的加密；
+ *
+ */
 public class Base64Utils {
 	 private static char[] base64EncodeChars = new char[]  
 			    { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',  
