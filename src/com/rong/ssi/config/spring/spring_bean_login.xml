@@ -4,11 +4,11 @@
  <bean id="userdaoId" class="com.rong.ssi.login.daoImpl.UserDaoImpl">
   <property name="sqlMapClient" ref="sqlMapClient"></property>
   </bean>
-   <!-- Service  XXXServiceImpl 里面需要定义 XXXdao,并注入get，set方法，否则会报错 (userdao)-->
+    <!-- Service  XXXServiceImpl类  里面需要定义 property里面的name,如：userdao ，并注入get，set方法，否则会报错-->
   <bean id="userDaoServiceId" class="com.rong.ssi.login.serviceImpl.UserDaoServiceImpl">
   <property name="userdao" ref="userdaoId"></property>
   </bean>
-      <!-- 用户注册action   里面需要定 义 XXXServiceInter,并注入get，set方法，否则会报错-->     
+    <!-- 用户注册   action类 里面需要定 义bean的property 里面name ,如：userdaoServiceInter 并注入get，set方法，否则会报错-->    
   <bean id="registerAction" name="registerAction" class="com.rong.ssi.login.action.RegisterAction" scope="prototype">
     <property name="userdaoServiceInter" ref="userDaoServiceId"></property>   
   </bean>
