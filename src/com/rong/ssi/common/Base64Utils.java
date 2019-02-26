@@ -131,7 +131,6 @@ public class Base64Utils {
 			    }  
 			  
 			    public static void main(String[] args) throws UnsupportedEncodingException {
-			    	
 			    	System.out.println(new String(decode("YWRtaW4y")));
 			    	System.out.println(encode("admin2".getBytes()));
 				}
