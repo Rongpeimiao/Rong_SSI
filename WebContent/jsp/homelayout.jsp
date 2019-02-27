@@ -30,7 +30,9 @@ $.ajax({
 	   }
 });
 
-
+$(function(){
+	$("#layout2 #pagerForm").submit();
+});
 </script>
 <div   style="padding:5px"  id="jbsxBox" >
 		<div class="panel" defH="100" style="min-width: 700px;">

@@ -1,11 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<style type="text/css">
-	ul.rightTools {float:right; display:block;}
-	ul.rightTools li{float:left; display:block; margin-left:5px}
-	
-</style>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script type="text/javascript">
 //j-resizeGrid  overflow: hidden;
@@ -16,7 +13,6 @@
 	
 		<div style="display: flex;width: 100%" >
 			 <div   style=" border:1px dashed #d0e0e3;width: 100%">
-			     <!--   <div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid"> -->
 						    <div class="panelBar">
 								<h1 style="margin-top: 8px;margin-left: 8px;">调度样本列表</h1>
 							</div>
@@ -131,20 +127,24 @@
 								</tbody>
 							</table>
 							<div class="panelBar" >
+								
 								<div class="pages">
 									<span>显示</span>
-									<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value}, 'layout1')"  >
-										<option  value="20">20</option>
-										<option value="50">50</option>
-										<option value="100">100</option>
-										<option value="200">200</option>
+									<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value}, 'layout1')">
+										<option <c:if test="${numPerPage==10}">selected="selected"</c:if>
+											value="10">10</option>
+										<option <c:if test="${numPerPage==20}">selected="selected"</c:if>
+											value="20">20</option>
+										<option <c:if test="${numPerPage==50}">selected="selected"</c:if>
+											value="50">50</option>
+										<option <c:if test="${numPerPage==100}">selected="selected"</c:if>
+											value="100">100</option>
 									</select>
-									<span>条，共50条</span>
+									 <span>条，共${pager.total}条</span>
 								</div>
 								
-								<div  class="pagination" rel="layout1" totalCount="200" numPerPage="20" pageNumShown="5" currentPage="1"  ></div>
+								<div  class="pagination" rel="layout1" totalCount="${pager.total}" numPerPage="${pager.numPerPage}" pageNumShown="${pager.numPerPage}" currentPage="${pager.pageNum}"  ></div>
 						
-							<!-- </div> -->
 						</div>
 			 </div>
 			  <form  id="pagerForm" action="homeNotice.action" onsubmit="return divSearch(this, 'layout1');" >
@@ -152,11 +152,7 @@
 				<input type="hidden" name="numPerPage" value="${pager.numPerPage}" />
               </form>
 			 
- 
-
 		</div>
-	
-	
 </div>
 
 
