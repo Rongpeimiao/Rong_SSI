@@ -8,11 +8,11 @@ import java.io.OutputStream;
 
 import Decoder.BASE64Decoder;
 import Decoder.BASE64Encoder;
-
+//将图片文件转化为字节数组字符串，并对其进行Base64编码处理  
 public class ImageBase64 {
 
 	public static String GetImageStr(String imgFile)  
-    {//将图片文件转化为字节数组字符串，并对其进行Base64编码处理  
+    {
         InputStream in = null;  
         byte[] data = null;  
         //读取图片字节数组  

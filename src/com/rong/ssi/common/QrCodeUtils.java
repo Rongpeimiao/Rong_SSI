@@ -17,7 +17,10 @@ import Decoder.BASE64Encoder;
 
 public class QrCodeUtils {
 
- 
+	  /* jar包括：  core.jar   javase.jar
+		    生成图片二进制代码： String binary = QrCodeUtils.creatRrCode("二维码内容", 200,200);
+		    前台展示 ： <div id="qrcode"><img src="data:image/png;base64,${binary }"></div>
+		*/
 
 	    public static String creatRrCode(String contents, int width, int height) {
 	        String binary = null;
@@ -62,10 +65,7 @@ public class QrCodeUtils {
 	        }
 	        return image;
 	    }
-        /* jar包括：  core.jar   javase.jar
-                                 生成图片二进制代码： String binary = QrCodeUtils.creatRrCode("二维码内容", 200,200);
-                                 前台展示 ： <div id="qrcode"><img src="data:image/png;base64,${binary }"></div>
-         */
+       
 
 	    public static void main(String[] args) {
 	        String binary = QrCodeUtils.creatRrCode("https://blog.csdn.net/ianly123", 200,200);

@@ -10,6 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 
+
+/**
+ * 生成jsp生成html工具类
+ * @author Administrator
+ *
+ */
 public class MakeHtml {
 
 	private static long star = 0;
