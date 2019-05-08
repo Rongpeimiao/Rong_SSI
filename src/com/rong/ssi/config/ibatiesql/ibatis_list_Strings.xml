@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+          小结一下ibatis框架下，传入参数为数组类型或者是List类型的sql写法。特别说明，iterate标签仅支持数组和List类型，如果传入Set，Map或其它集合类型，Ibatis会抛异常。 
+
+    1. 传入数组类型，不需要标明parameterClasss，数组和List类型对象一样都可以用<iterate>标签进行遍历。
+
+    <select id="selectOrgIdByNameStr" resultClass="Integer">
+    	SELECT id
+    	FROM org
+    	WHERE name IN
+    		<iterate close=")" open="("  conjunction=",">
+                <![CDATA[
+                     #[]# 
+                ]]> 
+           </iterate> 
+    </select>
+
+    java调用代码（注意空指针问题）：
+
+    @Override
+    public List<Integer> selectOrgIdByNameStr(String[] orgArchArr) {
+    	 return baseDao.queryForList("org.selectOrgIdByNameStr", orgArchArr, String.class);
+    }
+
+    2.传入List类型，泛型参数是八大基本类。这个时候parameterClass传的是List接口的类路径，而不是List的泛型参数的类路径！
+
+    <select id="searchWaiters" parameterClass="java.util.List" resultClass="com.chat.domain.zone.WaiterCgExt">
+    	SELECT *
+    	FROM waiter w, org o
+    	WHERE o.id = w.org_id
+    		AND w.id IN <iterate open="(" close=")" conjunction=",">
+    			#wid[]#
+    		</iterate>
+    </select>
+
+    java调用代码如下，注意空指针问题。
+
+    @Override
+    public List<WaiterCgExt> searchWaiters(ModAccManVo vo) {
+    	List<Integer> widList = baseDao.queryForList("zone.waiter.searchWaitersId", vo, Integer.class);
+    	if(CollectionUtils.isEmpty(widList)) {
+    		return new ArrayList<WaiterCgExt>();
+    	}
+    	return baseDao.queryForList("zone.waiter.searchWaiters", widList, WaiterCgExt.class);
+    }
+
+    3.传入的List的元素是复杂的对象类型，类型类型里面包含id属性。同样，parameterClass传入的是List接口的类路径，而不是List的泛型参数的类路径。遍历的时候，用#list[].id#就行了，“.”后面跟上要枚举的属性名称。
+   
+
+    <select id="selectWaitersByOrgList" resultClass="com.chat.domain.zone.Waiter" parameterClass="java.util.List">
+    	SELECT id, pin as userName
+    	FROM waiter
+    	WHERE org_id IN 
+    	 	<iterate open="(" close=")" conjunction=",">  
+            	#list[].id#  
+            </iterate>   
+    </select>
+
+    4.传入的参数是map，map的一个value对象的某个字段是List。这个时候，parameterClass是map，这个时候iterate标签得加一个property属性，这个属性指定value对象的List字段的名字。否则ibatis会报“ParameterObject or property was not a Collection, Array or Iterator.”。这种是我遇到的最复杂的情况，这种sql搞定了，其它的sql就不是问题了。
+
+    <select id="query" resultClass="BopEntityTag" parameterClass="map">
+        Select *
+        FROM ***_tag
+        WHERE tag_value != 0
+        <isNotNull property="q.codeSet" prepend="AND"> code IN
+            <iterate open="(" close=")" conjunction="," property="q.codeSet"> #q.codeSet[]# </iterate>
+        </isNotNull>
+    </select>
+
+    Java调用如下：
+
+    @Override
+    public List<BopEntityTagDO> query(***TagDO query) {
+    	Map<String, Object> params = new HashMap<String, Object>();
+    	params.put("q", query);
+    	......
+    	return queryForList(getStatementName("query"), params);
+    }
+  -->
