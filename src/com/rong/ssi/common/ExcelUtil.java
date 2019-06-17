@@ -246,6 +246,7 @@ public class ExcelUtil {
 	       /*  Row row;
 		        row = sheet1.createRow((short)(0)); //创建行    
 		        row.createCell(0).setCellValue("样本总数 （录入）"); //设置第一个（从0开始）单元格的数据
+		         //参数说明：CellRangeAddressint firstRow: 起始行号 int lastRow: 终止行号 int firstCol: 起始列号 int lastCol: 终止列号
 		        CellRangeAddress region=new CellRangeAddress(0, 1, 0, 0);
 		        sheet1.addMergedRegion(region);
 		        row.createCell(1).setCellValue("已完成"); //设置第一个（从0开始）单元格的数据
