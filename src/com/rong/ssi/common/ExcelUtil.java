@@ -20,6 +20,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
@@ -239,6 +240,20 @@ public class ExcelUtil {
 	         row.createCell(4).setCellValue(5);	
 	         row.createCell(5).setCellValue(6);		 
 	         row.createCell(6).setCellValue(7); 
+	         
+	         
+	         
+	       /*  Row row;
+		        row = sheet1.createRow((short)(0)); //创建行    
+		        row.createCell(0).setCellValue("样本总数 （录入）"); //设置第一个（从0开始）单元格的数据
+		        CellRangeAddress region=new CellRangeAddress(0, 1, 0, 0);
+		        sheet1.addMergedRegion(region);
+		        row.createCell(1).setCellValue("已完成"); //设置第一个（从0开始）单元格的数据
+		        region=new CellRangeAddress(0, 0, 1, 4);
+		        sheet1.addMergedRegion(region);
+		        row.createCell(5).setCellValue("未完成"); //设置第一个（从0开始）单元格的数据
+		        region=new CellRangeAddress(0, 0, 5, 11);
+		        sheet1.addMergedRegion(region);*/
 		List<byte[]> images = new ArrayList<>();
 				
 		// 必须去除每个base64前面的"data:image/png;base64,"这22个字符
